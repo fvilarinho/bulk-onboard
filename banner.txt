@@ -1,0 +1,13 @@
+  ____        _
+ | __ ) _   _| | | __
+ |  _ \| | | | | |/ /
+ | |_) | |_| | |   <
+ |____/ \__,_|_|_|\_\                   _
+  / _ \ _ __ | |__   ___   __ _ _ __ __| |
+ | | | | '_ \| '_ \ / _ \ / _` | '__/ _` |
+ | |_| | | | | |_) | (_) | (_| | | | (_| |
+  \___/|_| |_|_.__/ \___/ \__,_|_|  \__,_|
+
+** Version 1.0.0 **
+** Automation of the onboarding of multiple hostnames using templates (CDN and Security) **
+** Developed by Felipe Vilarinho (a.k.a Vila) **

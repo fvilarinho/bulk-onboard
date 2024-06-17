@@ -1,0 +1,5 @@
+/.idea/
+/iac/.credentials
+/iac/.terraform*
+/iac/terraform.tfstate*
+/iac/settings.json

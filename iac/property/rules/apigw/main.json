@@ -1,0 +1,78 @@
+{
+  "rules": {
+    "name": "default",
+    "children": [
+      "#include:minimizePayload.json",
+      "#include:performance.json",
+      "#include:security.json"
+    ],
+    "behaviors": [
+      {
+        "name": "origin",
+        "options": {
+          "cacheKeyHostname": "REQUEST_HOST_HEADER",
+          "compress": true,
+          "enableTrueClientIp": true,
+          "forwardHostHeader": "REQUEST_HOST_HEADER",
+          "httpPort": 80,
+          "httpsPort": 443,
+          "originSni": true,
+          "originType": "CUSTOMER",
+          "trueClientIpClientSetting": false,
+          "trueClientIpHeader": "True-Client-IP",
+          "verificationMode": "CUSTOM",
+          "hostname": "${env.originHostname}",
+          "customValidCnValues": [
+            "{{Origin Hostname}}",
+            "{{Forward Host Header}}"
+          ],
+          "originCertsToHonor": "STANDARD_CERTIFICATE_AUTHORITIES",
+          "standardCertificateAuthorities": [
+            "akamai-permissive",
+            "THIRD_PARTY_AMAZON"
+          ],
+          "ipVersion": "IPV4"
+        }
+      },
+      {
+        "name": "caching",
+        "options": {
+          "behavior": "NO_STORE"
+        }
+      },
+      {
+        "name": "cpCode",
+        "options": {
+          "value": {
+            "id": "${env.cpCode}"
+          }
+        }
+      },
+      {
+        "name": "report",
+        "options": {
+          "logHost": true,
+          "logReferer": true,
+          "logUserAgent": true,
+          "logAcceptLanguage": true,
+          "logCookies": "OFF",
+          "logCustomLogField": false,
+          "logEdgeIP": true,
+          "logXForwardedFor": true
+        }
+      },
+      {
+        "name": "siteShield",
+        "options": {
+          "ssmap": "${env.siteShield}"
+        }
+      }
+    ],
+    "options": {
+      "is_secure": true
+    },
+    "variables": [],
+    "comments": "The behaviors in the Default Rule apply to all requests for the property hostname(s) unless another rule overrides the Default Rule settings."
+  },
+  "comments": "Initial onboarding provisioned by automation using Terraform."
+}

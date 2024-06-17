@@ -1,0 +1,92 @@
+{
+  "general": {
+    "notes": "Initial onboarding provisioned by automation using Terraform.",
+    "notificationEmails": [ "<your_email>" ]
+  },
+  "security": {
+    "name": "Onboarding Automation",
+    "description": "Security configuration used to onboard new/legacy hostnames in Akamai security posture.",
+    "contract": "<contract_id>",
+    "group": "<group_id>",
+    "sharedResources": {
+      "ratePolicies": [
+        {
+          "name" : "Page View Requests",
+          "averageThreshold" : 20,
+          "burstThreshold" : 25,
+          "clientIdentifier" : "ip-useragent",
+          "matchType" : "path",
+          "pathMatchType" : "Custom",
+          "pathUriPositiveMatch" : true,
+          "requestType" : "ClientRequest",
+          "sameActionOnIpv6" : true,
+          "type" : "WAF",
+          "useXForwardForHeaders" : false
+        },
+        {
+          "name": "Forward Requests",
+          "averageThreshold": 45,
+          "burstThreshold": 55,
+          "clientIdentifier": "ip-useragent",
+          "matchType": "path",
+          "pathMatchType": "Custom",
+          "pathUriPositiveMatch": true,
+          "requestType": "ForwardRequest",
+          "sameActionOnIpv6": true,
+          "type": "WAF",
+          "useXForwardForHeaders": false
+        }
+      ]
+    },
+    "policies": [
+      {
+        "name": "<policy_name>",
+        "prefix": "pol1",
+        "ruleType": "<template_id>",
+        "bypassNetworkLists": [ "<network_list_name>" ],
+        "blockedIPNetworkLists": [ "<network_list_name>" ],
+        "blockedGeoNetworkLists": [ "<network_list_name>" ],
+        "exceptionsLists": [ "<network_list_name>" ],
+        "ratePolicies": [
+          "Page View Requests",
+          "Forward Requests"
+        ],
+        "slowPost": {
+          "rate": 10,
+          "period": 60
+        }
+      }
+    ],
+    "notes": "Initial onboarding provisioned by automation using Terraform."
+  },
+  "properties": [
+    {
+      "name": "<property_name>",
+      "contract": "<contract_id>",
+      "group": "<group_id>",
+      "product": "<product_id>>",
+      "hostname": "<hostname>",
+      "originHostname": "<origin_hostname>",
+      "edgeHostname": "<edgehostname>",
+      "ruleType": "<template_id>",
+      "siteShield": {
+        "name": "<map_name>",
+        "value": "<map_id>",
+        "srmap": "<sr_map_id>",
+        "hasMixedHosts": false,
+        "src": "FALLBACK"
+      },
+      "sureRoute": {
+        "testObjectUrl": "/akamai/sureroute.html",
+        "enableCustomKey": false,
+        "enabled": true,
+        "forceSslForward": false,
+        "raceStatTtl": "30m",
+        "srDownloadLinkTitle": "",
+        "toHostStatus": "INCOMING_HH",
+        "type": "CUSTOM_MAP",
+        "customMap": "<sr_map_id>"
+      }
+    }
+  ]
+}

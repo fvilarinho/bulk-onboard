@@ -1,0 +1,41 @@
+{
+    "name": "Accelerate delivery",
+    "children": [
+        {
+            "name": "Protocol optimizations",
+            "children": [],
+            "behaviors": [
+                {
+                    "name": "enhancedAkamaiProtocol",
+                    "options": {
+                        "display": ""
+                    }
+                },
+                {
+                    "name": "http2",
+                    "options": {
+                        "enabled": ""
+                    }
+                },
+                {
+                    "name": "allowTransferEncoding",
+                    "options": {
+                        "enabled": true
+                    }
+                }
+            ],
+            "criteria": [],
+            "criteriaMustSatisfy": "all",
+            "comments": "Serve your website using modern and fast protocols."
+        }
+    ],
+    "behaviors": [
+        {
+            "name": "sureRoute",
+            "options": "${env.sureRoute}"
+        }
+    ],
+    "criteria": [],
+    "criteriaMustSatisfy": "all",
+    "comments": "Control the settings related to improving the performance of delivering objects to your users."
+}
