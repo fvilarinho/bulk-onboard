@@ -40,9 +40,9 @@
     },
     "policies": [
       {
-        "name": "<policy_name>",
+        "name": "apigw",
         "prefix": "pol1",
-        "ruleType": "<template_id>",
+        "ruleType": "apigw",
         "bypassNetworkLists": [ "<network_list_name>" ],
         "blockedIPNetworkLists": [ "<network_list_name>" ],
         "blockedGeoNetworkLists": [ "<network_list_name>" ],
@@ -68,7 +68,7 @@
       "hostname": "<hostname>",
       "originHostname": "<origin_hostname>",
       "edgeHostname": "<edgehostname>",
-      "ruleType": "<template_id>",
+      "ruleType": "apigw",
       "siteShield": {
         "name": "<map_name>",
         "value": "<map_id>",
