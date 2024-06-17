@@ -36,7 +36,6 @@ Follow the documentation below to know more about Akamai:
 - [**How to create Akamai EdgeGrid credentials**](https://techdocs.akamai.com/developer/docs/make-your-first-api-call)
 
 ### Important notes
-- **If any phase got errors or violations, the pipeline will stop.**
 - **DON'T EXPOSE OR COMMIT ANY SENSITIVE DATA, SUCH AS CREDENTIALS, IN THE PROJECT.**
 
 ### Contact
