@@ -24,16 +24,19 @@ resource "akamai_appsec_siem_settings" "default" {
 
 # Definition of the policies.
 resource "akamai_appsec_security_policy_default_protections" "default" {
-  for_each               = { for  policy in local.settings.security.policies : policy.name => policy }
+  for_each = { for  policy in local.settings.security.policies : policy.name => policy }
+
   config_id              = akamai_appsec_configuration.default.id
   security_policy_name   = each.key
   security_policy_prefix = each.value.prefix
-  depends_on             = [ akamai_appsec_configuration.default ]
+
+  depends_on = [ akamai_appsec_configuration.default ]
 }
 
 # Definition of the match targets of a policy.
 resource "akamai_appsec_match_target" "default" {
-  for_each     = { for policy in local.settings.security.policies : policy.name => policy }
+  for_each = { for policy in local.settings.security.policies : policy.name => policy }
+
   config_id    = akamai_appsec_configuration.default.id
   match_target = jsonencode(
     {
@@ -48,7 +51,9 @@ resource "akamai_appsec_match_target" "default" {
       },
       "type" : "website",
       "sequence" : 0
-    })
+    }
+  )
+
   depends_on = [
     data.akamai_networklist_network_lists.default,
     akamai_appsec_configuration.default,
@@ -58,7 +63,8 @@ resource "akamai_appsec_match_target" "default" {
 
 # Fetches the security configuration metadata.
 data "akamai_appsec_configuration" "default" {
-  name       = akamai_appsec_configuration.default.name
+  name = akamai_appsec_configuration.default.name
+
   depends_on = [ akamai_appsec_configuration.default ]
 }
 
@@ -69,7 +75,8 @@ resource "akamai_appsec_activations" "staging" {
   network             = "STAGING"
   note                = local.settings.security.notes
   version             = data.akamai_appsec_configuration.default.latest_version
-  depends_on          = [
+
+  depends_on = [
     akamai_appsec_configuration.default,
     akamai_appsec_siem_settings.default,
     akamai_appsec_rate_policy.default,

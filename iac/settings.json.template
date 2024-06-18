@@ -48,12 +48,19 @@
         "blockedGeoNetworkLists": [ "<network_list_name>" ],
         "exceptionsLists": [ "<network_list_name>" ],
         "ratePolicies": [
-          "Page View Requests",
-          "Forward Requests"
+            {
+                "name": "Page View Requests",
+                "action": "deny"
+            },
+            {
+                "name": "Forward Requests",
+                "action": "deny"
+            }
         ],
         "slowPost": {
           "rate": 10,
-          "period": 60
+          "period": 60,
+          "action": "abort"
         }
       }
     ],

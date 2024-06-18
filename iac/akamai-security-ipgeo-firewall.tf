@@ -17,12 +17,14 @@ locals {
 # Fetches the metadata of network lists used in the security configuration.
 data "akamai_networklist_network_lists" "default" {
   for_each = toset(local.allNetworkListsNames)
-  name     = each.key
+
+  name = each.key
 }
 
 # Definition of the IP/GEO Firewall.
 resource "akamai_appsec_ip_geo" "default" {
-  for_each                   = { for policy in local.settings.security.policies : policy.name => policy }
+  for_each = { for policy in local.settings.security.policies : policy.name => policy }
+
   config_id                  = akamai_appsec_configuration.default.config_id
   security_policy_id         = akamai_appsec_security_policy_default_protections.default[each.key].security_policy_id
   mode                       = "block"
@@ -30,7 +32,8 @@ resource "akamai_appsec_ip_geo" "default" {
   geo_network_lists          = local.blockedGeoNetworkLists[each.key]
   ip_network_lists           = local.blockedIPNetworkLists[each.key]
   exception_ip_network_lists = local.exceptionsLists[each.key]
-  depends_on                 = [
+
+  depends_on = [
     data.akamai_networklist_network_lists.default,
     akamai_appsec_configuration.default,
     akamai_appsec_security_policy_default_protections.default
